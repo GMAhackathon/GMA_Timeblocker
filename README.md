@@ -12,16 +12,27 @@ Install Node.js 12.14.0 LTS from (https://nodejs.org/en)
 
 ### Or install them one at a time
 `npm install -D prettier`
+
 `npm install -D eslint eslint-config-prettier`
+
 `npm install -D parcel-bundler`
+
 `npm install react react-dom`
+
 `npm install -D babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+
 `npm install -D eslint-plugin-react-hooks`
+
 `npm install --save react-router-dom`
+
 `npm install -D babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react`
+
 `npm install react-redux`
+
 `npm install babel-cli express`
+
 `npm install @emotion/core @emotion/babel-preset-css-prop`
+
 `npm install --save styled-components`
 
 ### Install VS Code Extensions
