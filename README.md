@@ -8,4 +8,45 @@ Install Node.js 12.14.0 LTS from (https://nodejs.org/en)
 ### Install all needed packages in 2 bundles
 `npm install -D prettier eslint eslint-config-prettier parcel-bundler babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react`
 
+`npm install react react-dom react-router-dom react-redux babel-cli express @emotion/core @emotion/babel-preset-css-prop styled-components`
+
+### Or install them one at a time
+`npm install -D prettier`
+`npm install -D eslint eslint-config-prettier`
+`npm install -D parcel-bundler`
+`npm install react react-dom`
+`npm install -D babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react`
+`npm install -D eslint-plugin-react-hooks`
+`npm install --save react-router-dom`
+`npm install -D babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react`
+`npm install react-redux`
+`npm install babel-cli express`
+`npm install @emotion/core @emotion/babel-preset-css-prop`
+`npm install --save styled-components`
+
+### Install VS Code Extensions
+*	Prettier- Code formatter
+*	 ESLint
+*	 vscode-styled-components.
+
+### Save VS Code Preferences for Prettier
+ *Go to File-->Preferences-->Settings
+    * Search for format on save and select the radio button
+    * Search for Prettier:Require Config and select the radio button
+    
+    
+## ====Git Flow====
+`git checkout -b [your_personal_branch_here] `
+`git add . `
+`git commit -m "here goes the message"`
+`git push origin [your_personal_branch_here] `
+`git checkout master`
+`git fetch`
+`git pull origin master`
+**======Check for conflicts======**
+`git pull origin [your_personal_branch_here] `
+**======Check for conflicts======**
+`git push origin master`
+`git checkout [your_personal_branch_here] `
+`git pull origin master`
 
