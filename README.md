@@ -34,7 +34,10 @@ Install Node.js 12.14.0 LTS from (https://nodejs.org/en)
     * Search for format on save and select the radio button
     * Search for Prettier:Require Config and select the radio button
     
-    
+### Running the Development Server
+This project uses Parcel, it starts out of the index.html (we can change this) that links to the index.js where the root and App is.  To run the dev server run the following:
+`npm run dev'
+It operates on http://localhost:1234/
 ## ====Git Flow====
 `git checkout -b [your_personal_branch_here] `
 
