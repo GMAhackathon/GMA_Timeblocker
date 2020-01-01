@@ -39,15 +39,26 @@ Install Node.js 12.14.0 LTS from (https://nodejs.org/en)
 `git checkout -b [your_personal_branch_here] `
 
 `git add . `
+
 `git commit -m "here goes the message"`
+
 `git push origin [your_personal_branch_here] `
+
 `git checkout master`
+
 `git fetch`
+
 `git pull origin master`
+
 **======Check for conflicts======**
+
 `git pull origin [your_personal_branch_here] `
+
 **======Check for conflicts======**
+
 `git push origin master`
+
 `git checkout [your_personal_branch_here] `
+
 `git pull origin master`
 
