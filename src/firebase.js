@@ -4,7 +4,7 @@ import "firebase/database";
 import "firebase/storage";
 
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDn8WXUkGtjzf7tvDWGISA7i9A1ykxEC7M",
     authDomain: "gma-scheduler.firebaseapp.com",
     databaseURL: "https://gma-scheduler.firebaseio.com",
@@ -16,4 +16,4 @@ var firebaseConfig = {
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
 
-  export default firebase;
+  export default firebaseConfig;
