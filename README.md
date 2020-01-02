@@ -5,6 +5,11 @@ An app for students and parents of Green Magnet Academy to schedule time for use
 ### Install Node.js
 Install Node.js 12.14.0 LTS from (https://nodejs.org/en)
 
+## Update (1/2/2020 2:22 AM EST
+all packages that are currently used should be installed by just using the following command:
+`npm install`
+If this does not work for you use the "Install all needed packages in 2 bundles below".
+
 ### Install all needed packages in 2 bundles
 `npm install -D prettier eslint eslint-config-prettier parcel-bundler babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react`
 
