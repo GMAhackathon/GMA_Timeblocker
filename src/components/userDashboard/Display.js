@@ -7,20 +7,21 @@ import moment from 'moment';
 function Display() {
   //if current date valid, display reservation page
   // if not, display calendar page
-  const current = localStorage.getItem('current');
+  let current = JSON.parse(localStorage.getItem('current'));
   const [reload, setReload] = useState(false);
   const now = moment();
-  console.log('Compare', moment(current) < now)
+  // console.log('Compare', moment(current) < now)
 
   useEffect(() => {
     console.log('RELOAD EFFECT', current)
-  }, [reload])
+    current = JSON.parse(localStorage.getItem('current'))
+  }, [current])
   
 
-  {if (current.length === 0 || moment(current) < now) {
+  {if (current.date.length === 0 || moment(current.date) < now) {
     return <CalendarPage reload={setReload}/>
   } else {
-    return <ReservationPage />
+    return <ReservationPage reload={setReload}/>
   }}
 
 }

@@ -73,12 +73,37 @@ function Card({ item, day, reload }) {
     .then(res => {
         console.log(res)
         // props.history.push('/dashboard') 
-        setSuccessMessage(true)
-        localStorage.setItem('current', item)
-        setTimeout(() => {
-          handleCancel(); 
-          reload(true);
-        }, 2000) 
+
+        axiosWithAuth()
+        .get(`https://gma-scheduler.herokuapp.com/api/users/${id}`)
+        .then(res => {
+            // console.log('USER', res.data.appointment.pop())
+            if (res.data.appointment.length > 0) {
+              localStorage.setItem('current', JSON.stringify(res.data.appointment.pop()))
+            } else {
+              localStorage.setItem('current', JSON.stringify({date: ''}))
+            }
+            // localStorage.setItem('current', "")
+            console.log('USER PARSE', JSON.parse(localStorage.getItem('current')))
+            // props.history.push('/dashboard') 
+            setSuccessMessage(true)
+            // localStorage.setItem('current', item)
+            setTimeout(() => {
+              handleCancel(); 
+              reload(true);
+            }, 2000) 
+
+        })
+        .catch(err => {
+            console.log(err)
+        })
+
+        // setSuccessMessage(true)
+        // // localStorage.setItem('current', item)
+        // setTimeout(() => {
+        //   handleCancel(); 
+        //   reload(true);
+        // }, 2000) 
                     
     })
     .catch(err => {
