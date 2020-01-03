@@ -2,12 +2,12 @@ import React from 'react';
 import Header from "./Header";
 import Display from "./Display";
 
-function Index() {
+function Index({ user }) {
 
   return (
     <div>
       <Header />
-      <Display />
+      <Display user={user}/>
     </div>
   )
 }
