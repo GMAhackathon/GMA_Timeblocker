@@ -26,7 +26,9 @@ export default function Login(props)  {
                 console.log(res)
                 localStorage.setItem('token', res.data.token)
                 // below is the only way to retrieve the user id from server
-                // localStorage.setItem('reviewer', res.data.user.id)
+                localStorage.setItem('message', res.data.message)
+                localStorage.setItem('id', res.data.id)
+                localStorage.setItem('admin', res.data.admin)
                 props.history.push('/dashboard')                
             })
             .catch(err => {
