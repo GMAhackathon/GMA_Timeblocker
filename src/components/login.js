@@ -34,7 +34,7 @@ const Login = (props) => {
     return(
         <StyledDiv>
             
-            <h1>Please Login!</h1>
+            <StyledText>Please Login</StyledText>
 
             <form onSubmit = {handleSubmit}>
 
@@ -68,22 +68,31 @@ const StyledDiv = styled.div`
     margin-top: 10%;
     background: #007B2B;
     box-sizing: border-box;
-    margin-right: 30%
-    padding-left: 10%;
+    margin-right: 37%; 
+    padding-left: 15%;
+    padding-bottom: 5%;
+    width: 50%;
+    border-radius: 9px;
 `
 const StyledInput = styled.input`
     display: flex;
-    margin-bottom: 2%;
+    margin-bottom: 5%;
     padding: 1.1%;
     border-radius: 2px;
     border: 1px solid lightgrey;
     font-size: 1rem;
+    width: 40%;
+    margin-left: 4%;
 `
 
 const StyledButton = styled.button`
     padding: 2%;
-    width: 17%;
+    width: 30%;
     border-radius: 3px;
     font-size: .8rem;
-    margin-left: 5%;
+    margin-left: 9%;
+`
+const StyledText = styled.h1`
+    padding-top: 5%;
+    
 `
