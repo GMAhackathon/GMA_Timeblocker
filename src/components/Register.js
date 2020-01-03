@@ -1,131 +1,125 @@
-import React, { useState } from 'react';
-import { axiosWithAuth } from '../utils/axiosWithAuth';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import { axiosWithAuth } from "../utils/axiosWithAuth";
+import styled from "styled-components";
 
-const Register = (props) => {
+const Register = props => {
+  const [credentials, setCredentials] = useState({
+    email: "",
+    password: "",
+    firstname: "",
+    lastname: "",
+    studentname: ""
+  });
 
-    const [credentials, setCredentials] = useState({
-
-        email: '',
-        password: '', 
-        firstname: '',
-        lastname: '',
-        studentname: ''
+  const handleChange = e => {
+    setCredentials({
+      ...credentials,
+      [e.target.name]: e.target.value
     });
+  };
 
-    const handleChange = (e) => {
-        setCredentials({
-            ...credentials, 
-            [e.target.name] : e.target.value
-        })
-    }
+  const handleSubmit = e => {
+    e.preventDefault();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    axiosWithAuth()
+      .post("ttps://gma-scheduler.herokuapp.com/api/auth/register", credentials)
+      .then(res => {
+        localStorage.setItem("token", res.data.token);
+        const id = localStorage.getItem("id");
 
         axiosWithAuth()
-        .post('/auth/register', credentials)
-        .then(res => {
-            localStorage.setItem('token', res.data.token);
-            const id = localStorage.getItem('id')
+          .get(`/users/${id}`)
+          .then(res => {
+            props.history.push("/dashboard");
+          });
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
-            axiosWithAuth()
-            .get(`/users/${id}`)
-            .then(res => {
-                props.history.push('/dashboard') 
-            })
-        })
-        .catch(err => {
-            console.log(err);
-        })
-    }
+  return (
+    <StyledDiv>
+      <StyledText>Please Sign Up</StyledText>
 
-    return(
-        <StyledDiv>
-            
-            <StyledText>Please Sign Up</StyledText>
+      <form onSubmit={handleSubmit}>
+        <StyledInput
+          type="text"
+          name="firstname"
+          placeholder="Parent's First Name"
+          onChange={handleChange}
+          value={credentials.firstname}
+        />
 
-            <form onSubmit = {handleSubmit}>
+        <StyledInput
+          type="text"
+          name="lastname"
+          placeholder="Last Name"
+          onChange={handleChange}
+          value={credentials.lastname}
+        />
 
-                <StyledInput
-                    type = "text"
-                    name = "firstname"
-                    placeholder = "Parent's First Name"
-                    onChange = {handleChange}
-                    value = {credentials.firstname}
-                />
+        <StyledInput
+          type="text"
+          name="email"
+          placeholder="Email"
+          onChange={handleChange}
+          value={credentials.email}
+        />
 
-                <StyledInput
-                    type = "text"
-                    name = "lastname"
-                    placeholder = "Last Name"
-                    onChange = {handleChange}
-                    value = {credentials.lastname}
-                />
+        <StyledInput
+          type="password"
+          name="password"
+          placeholder="Password"
+          onChange={handleChange}
+          value={credentials.password}
+        />
 
-                <StyledInput
-                    type = "text"
-                    name = "email"
-                    placeholder = "Email"
-                    onChange = {handleChange}
-                    value = {credentials.email}
-                />
+        <StyledInput
+          type="text"
+          name="studentname"
+          placeholder="Student's Name"
+          onChange={handleChange}
+          value={credentials.studentname}
+        />
 
-                <StyledInput
-                    type = "password"
-                    name = "password"
-                    placeholder = "Password"
-                    onChange = {handleChange}
-                    value = {credentials.password}
-                />
-
-                <StyledInput
-                    type = "text"
-                    name = "studentname"
-                    placeholder = "Student's Name"
-                    onChange = {handleChange}
-                    value = {credentials.studentname}
-                />
-
-                <StyledButton>Submit</StyledButton>
-            </form>
-        </StyledDiv>
-    )
+        <StyledButton>Submit</StyledButton>
+      </form>
+    </StyledDiv>
+  );
 };
 
 export default Register;
 
-
 const StyledDiv = styled.div`
-    margin-left: 20%;
-    margin-top: 10%;
-    background: #007B2B;
-    box-sizing: border-box;
-    margin-right: 37%; 
-    padding-left: 15%;
-    padding-bottom: 5%;
-    width: 50%;
-    border-radius: 9px;
-`
+  margin-left: 20%;
+  margin-top: 10%;
+  background: #007b2b;
+  box-sizing: border-box;
+  margin-right: 37%;
+  padding-left: 15%;
+  padding-bottom: 5%;
+  width: 50%;
+  border-radius: 9px;
+`;
 const StyledInput = styled.input`
-    display: flex;
-    margin-bottom: 5%;
-    padding: 1.1%;
-    border-radius: 2px;
-    border: 1px solid lightgrey;
-    font-size: 1rem;
-    width: 40%;
-    margin-left: 4%;
-`
+  display: flex;
+  margin-bottom: 5%;
+  padding: 1.1%;
+  border-radius: 2px;
+  border: 1px solid lightgrey;
+  font-size: 1rem;
+  width: 40%;
+  margin-left: 4%;
+`;
 
 const StyledButton = styled.button`
-    padding: 2%;
-    width: 30%;
-    border-radius: 3px;
-    font-size: .8rem;
-    margin-left: 9%;
-`
+  padding: 2%;
+  width: 30%;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-left: 9%;
+`;
 const StyledText = styled.h1`
-    padding-top: 5%;
-    
-`
+  padding-top: 5%;
+`;
