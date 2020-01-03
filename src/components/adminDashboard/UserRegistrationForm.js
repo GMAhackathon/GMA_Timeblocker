@@ -2,6 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
 // import moment from 'moment';
 import { Spin } from 'antd';
+import axiosWithAuth from '../../authentication/axiosWithAuth';
 
 const FormWrap = styled.form`
   // background: #EDEEEF;
@@ -35,15 +36,14 @@ const Button = styled.button`
 `
 
 
-function UserRegistrationForm(props) {
-  const [user, setUser] = useState({firstName: '', lastName: '', email: '', familySize: ''});
-
-  // display a spinner on isLoading when posting a new record
-  const [loading, setLoading] = useState(props.createNewStudentIsLoading);
+function UserRegistrationForm({setReload, setForm}) {
+  const [user, setUser] = useState({firstName: '', lastName: '', email: '', familySize: '', password: '',
+                                     admin: false, current: null});
+  
 
   useEffect(() => {
 
-  }, [loading])
+  }, [])
 
 
   function handleChange(event) {
@@ -52,6 +52,18 @@ function UserRegistrationForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
+
+    axiosWithAuth()
+    .post('https://gma-scheduler.herokuapp.com/api/users', user)
+    .then(res => {
+        console.log('NEW USER', res);
+        setReload(true);
+        setForm(false);
+
+    })
+    .catch(err => {
+        console.log(err)
+    })
 
   }
 
@@ -64,8 +76,8 @@ function UserRegistrationForm(props) {
       return (
         <FormWrap onSubmit={handleSubmit} style={{margin: '30px 10px 20px 10px'}}>
           <fieldset style={{border: '1px solid transparent', margin: '10px 5px 0px 5px',  background: '#d8dee0'}}>
-            <div style={{display: 'grid', textAlign: 'left', gridTemplateColumns: '1fr 1fr 1fr 1fr',
-                         gridGap: '10px', margin: '10px'}}>
+            <div style={{display: 'grid', textAlign: 'left', gridTemplateColumns: '1fr 1fr 1fr',
+                         gridGap: '10px', margin: '10px', marginBottom: '15px'}}>
               <div >
                 <label>First Name</label>
                 <div>
@@ -86,7 +98,7 @@ function UserRegistrationForm(props) {
                     onChange={handleChange} />
                 </div>
               </div>
-              <div style={{gridColumn: 'span 2'}}>
+              <div >
                 <label>Email</label>
                 <div>
                   <Input 
@@ -97,7 +109,7 @@ function UserRegistrationForm(props) {
                     onChange={handleChange} />
                 </div>
               </div>
-              <div style={{gridColumn: 'span 2'}}>
+              <div>
                 <label>Family Size</label>
                 <div>
                   <Input 
@@ -108,6 +120,17 @@ function UserRegistrationForm(props) {
                     onChange={handleChange} />
                 </div>
               </div>
+              <div>
+                <label>Password</label>
+                <div>
+                  <Input 
+                    style={{width: '100%'}}
+                    type="text"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange} />
+                </div>
+              </div>
             </div>
           </fieldset>
           <div style={{alignSelf: 'flex-end'}}>
@@ -115,7 +138,7 @@ function UserRegistrationForm(props) {
               Cancel
             </Button>
             <Button type="submit">
-              Add student
+              Add user
             </Button>
           </div>
         </FormWrap>

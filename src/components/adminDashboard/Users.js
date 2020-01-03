@@ -119,7 +119,7 @@ const Users = props => {
           {form ? (
             <UserRegistrationForm handleCancelButtonOnForm={handleCancelButtonOnForm} setNewRecord={setNewRecord} 
                                       newRecord={newRecord} displaySuccessMessageTimeout={displaySuccessMessageTimeout}
-                                      setSavePrevState={setSavePrevState}/>
+                                      setSavePrevState={setSavePrevState} setReload={setReload} setForm={setForm}/>
           ) : null}
           
           
