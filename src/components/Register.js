@@ -22,7 +22,7 @@ const Register = props => {
     e.preventDefault();
 
     axiosWithAuth()
-      .post("ttps://gma-scheduler.herokuapp.com/api/auth/register", credentials)
+      .post("/auth/register", credentials)
       .then(res => {
         localStorage.setItem("token", res.data.token);
         const id = localStorage.getItem("id");
