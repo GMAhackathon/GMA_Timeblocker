@@ -7,6 +7,7 @@ import { usersTableColumns } from './data';
 import UserRegistrationForm from './UserRegistrationForm';
 import styled from 'styled-components';
 import axiosWithAuth from '../../authentication/axiosWithAuth';
+import { Modal, Button } from 'antd';
 
 const RowAbove =  styled.div`
 display: flex;
@@ -29,6 +30,13 @@ const Users = props => {
   const [savePrevState, setSavePrevState] = useState(newRecord); //usefull when another student record needs to be added right after the first one
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState('none');
 
+  const [modal, setModal] = useState(false);
+  const [successMessage, setSuccessMessage] = useState(false);
+  const [failureMessage, setFailureMessage] = useState(false);
+  const [user, setUser] = useState();
+  const [reload, setReload] = useState(false);
+
+
     
   useEffect(() => {
     //get users data, set to state
@@ -48,7 +56,7 @@ const Users = props => {
         console.log(err)
     })
 
-  }, [])
+  }, [reload])
 
   const handleCancelButtonOnForm = () => {
     setForm(false);
@@ -66,7 +74,31 @@ const Users = props => {
     }, 3000)
     
   }
+
+  const handleRowClick = (user) => {
+    console.log('RECORD', user)
+    setModal(true);
+    setUser(user);
+  }
     
+  const handleCancel = () => {
+    setModal(false)
+  }
+
+  const handleDeleteUser = () => {
+    console.log('SET USER: ', user)
+    //api/users/1 
+    axiosWithAuth()
+    .delete(`https://gma-scheduler.herokuapp.com/api/users/${user.id}`)
+    .then(res => {
+        console.log('USERS DATA', res)
+        setModal(false);
+        setReload(true);
+    })
+    .catch(err => {
+        console.log(err)
+    })
+  }
 
 
   return (
@@ -105,10 +137,26 @@ const Users = props => {
                 onClick: event => {
                   // setStudentId(record.id)
                   // props.getStudentById(record.id)
+                  handleRowClick(record)
                 }
               };
             }}
           />
+          {modal ? (
+              <Modal
+                title="User Actions"
+                visible={modal}
+                onOk={handleDeleteUser}
+                onCancel={handleCancel}
+                okText="Delete User"
+              >
+                <p>User ID: {user.id}</p>
+                <p>User Name: {user.firstName}</p>
+                <p style={{fontSize: '16px', fontWeight: '600'}}>Delete User?</p>
+                <p style={{display: `${successMessage ? 'block' : 'none'}`, color: 'green'}}>User has been deleted</p>
+                <p style={{display: `${failureMessage ? 'block' : 'none'}`, color: 'red'}}>Something went wrong. Try again.</p>
+              </Modal>
+      ) : null}
           {/* )} */}
       </div>
   )
