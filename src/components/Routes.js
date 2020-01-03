@@ -1,5 +1,5 @@
 import React from 'react';
-import AdminDashboard from '../components/adminDashboard';
+import Dashboard from '../components/index';
 import { Route, Switch } from "react-router-dom";
 import Login from '../authentication/Login';
 import PrivateRoute from '../authentication/PrivateRoute';
@@ -14,9 +14,9 @@ function Routes(props) {
           <>
             <AdminDashboard />
           </>}/>  */}
-                  <Route exact path="/dashboard" render={() => 
+          <Route exact path="/dashboard" render={() => 
           <>
-            <AdminDashboard />
+            <Dashboard />
           </>}/> 
 
        
