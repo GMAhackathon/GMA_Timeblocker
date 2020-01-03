@@ -1,6 +1,9 @@
 import React from "react";
 
 const AccountSettingsPanel = props => {
+  const handleSubmit = e => {
+    e.preventDefault();
+  };
   return (
     <div className="edit-settings-grid">
       <div>Avatar (only if time)</div>

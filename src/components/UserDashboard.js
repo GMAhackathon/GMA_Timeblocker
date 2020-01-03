@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import CalendarCard from "./CalanderCard";
 import AccountSettingsPanel from "./AccountSettingsPanel";
 import UserPanel from "./UserPanel";
 import UserNavbar from "./UserNavBar";
 import UserReservation from "./UserReservation";
+import axiosWithAuth from "../authentication/axiosWithAuth";
+import CalendarPage from "./userDashboard/CalendarPage";
 
 const RESERVATIONDISPLAY = "RESERVATIONDISPLAY";
 const NORESERVATIONDISPLAY = "NORESERVATIONDISPLAY";
@@ -17,7 +18,7 @@ const UserDashboard = props => {
     hasReservation: false
   });
 
-  const options = RESERVATIONDISPLAY;
+  let options = RESERVATIONDISPLAY;
 
   if (!displayOptions.editingAccount && !displayOptions.hasReservation) {
     options = NORESERVATIONDISPLAY;
@@ -27,17 +28,19 @@ const UserDashboard = props => {
     options = NORESERVATIONEDIT;
   }
 
+  // Api Call to logged in User
   useEffect(() => {
-    // Api Call to logged in User
-    useEffect(() => {
-      axiosWithAuth()
-        .get("")
-        .then(res => {
-          setUser(res.data);
-        })
-        .catch(err => console.log(err.message));
-    });
+    const token = localStorage.getItem("token");
+    console.log(token);
+    axiosWithAuth()
+      .get("")
+      .then(res => {
+        setUser(res.data);
+      })
+      .catch(err => console.log(err.message));
   });
+
+  console.log(user);
 
   switch (options) {
     case RESERVATIONDISPLAY:
@@ -66,18 +69,20 @@ const UserDashboard = props => {
           <UserNavbar />
           User does not have reservation and in AccountSettingsPanel
           <AccountSettingsPanel />
-          <CalendarCard />
+          <CalendarPage />
         </div>
       );
 
     default:
       // NORESERVATIONDISPLAY
-      <div>
-        <UserNavbar />
-        User does not have reservation and in UserPanel
-        <UserPanel />
-        <CalendarCard />
-      </div>;
+      return (
+        <div>
+          <UserNavbar />
+          User does not have reservation and in UserPanel
+          <UserPanel />
+          <CalendarPage />
+        </div>
+      );
   }
 
   // Check if reservation exists
@@ -107,4 +112,4 @@ const UserDashboard = props => {
   // );
 };
 
-export default UserDashBoard;
+export default UserDashboard;
