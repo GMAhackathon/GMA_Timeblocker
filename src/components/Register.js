@@ -9,8 +9,7 @@ const Register = (props) => {
         email: '',
         password: '', 
         firstname: '',
-        lastname: '',
-        studentname: ''
+        lastname: ''
     });
 
     const handleChange = (e) => {
@@ -77,14 +76,6 @@ const Register = (props) => {
                     placeholder = "Password"
                     onChange = {handleChange}
                     value = {credentials.password}
-                />
-
-                <StyledInput
-                    type = "text"
-                    name = "studentname"
-                    placeholder = "Student's Name"
-                    onChange = {handleChange}
-                    value = {credentials.studentname}
                 />
 
                 <StyledButton>Submit</StyledButton>
