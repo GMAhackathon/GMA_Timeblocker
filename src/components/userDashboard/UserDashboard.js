@@ -30,14 +30,17 @@ const UserDashboard = props => {
 
   // Api Call to logged in User
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const id = localStorage.getItem("id");
+    console.log("nl: UserID: ", id);
     axiosWithAuth()
-      .get("")
+      .get(`https://gma-scheduler.herokuapp.com/api/users/${id}`)
       .then(res => {
         setUser(res.data);
       })
       .catch(err => console.log(err.message));
-  });
+  }, []);
+
+  console.log(user);
 
   switch (options) {
     case RESERVATIONDISPLAY:
