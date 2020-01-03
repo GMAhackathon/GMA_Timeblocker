@@ -1,13 +1,12 @@
 import React from "react";
 import Header from "./Header";
-//import Display from "./Display";
-import UserDashboard from "./UserDashboard";
+import Display from "./Display";
 
 function Index({ user }) {
   return (
     <div>
-      {/*<Header />*/}
-      <UserDashboard user={user} />
+      <Header />
+      <Display user={user} />
     </div>
   );
 }
