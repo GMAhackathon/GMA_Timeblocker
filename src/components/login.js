@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import { axiosWithAuth } from '../utils/axiosWithAuth';
 import styled from 'styled-components';
 
 const Login = (props) => {
@@ -20,11 +20,11 @@ const Login = (props) => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios()
+        axiosWithAuth()
         .post('/login', credentials)
         .then(res => {
             localStorage.setItem('token', res.data.payload);
-            props.history.push('/dashboard') //or whatever endpoint user dashboard is
+            // props.history.push('/dashboard') //or whatever endpoint user dashboard is
         })
         .catch(err => {
             console.log(err);

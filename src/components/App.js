@@ -17,6 +17,7 @@ function App() {
 
         <Switch>
             <Route path = "/login" component = {Login} />
+           
         </Switch>
 
         </Router>
