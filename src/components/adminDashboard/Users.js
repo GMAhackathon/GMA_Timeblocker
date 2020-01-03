@@ -6,6 +6,7 @@ import { faPlusCircle, faCheck } from '@fortawesome/free-solid-svg-icons';
 import { usersTableColumns } from './data';
 import UserRegistrationForm from './UserRegistrationForm';
 import styled from 'styled-components';
+import axiosWithAuth from '../../authentication/axiosWithAuth';
 
 const RowAbove =  styled.div`
 display: flex;
@@ -32,9 +33,20 @@ const Users = props => {
   useEffect(() => {
     //get users data, set to state
     // setUsers = axios.get('/users')
-    setUsers(users.sort((a,b) => { 
-      return b.id - a.id }
-    ))
+
+    axiosWithAuth()
+    .get('https://gma-scheduler.herokuapp.com/api/users')
+    .then(res => {
+        console.log('USERS DATA', res)
+        let data = res.data;
+        setUsers(data.sort((a,b) => { 
+          return b.id - a.id }
+        ))
+
+    })
+    .catch(err => {
+        console.log(err)
+    })
 
   }, [])
 

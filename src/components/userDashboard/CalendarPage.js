@@ -21,6 +21,16 @@ function CalendarPage({ reload }) {
     let arr = getDates(start, end);
     setDateRange(arr)
 
+    axiosWithAuth()
+    .get('https://gma-scheduler.herokuapp.com/api/calendar')
+    .then(res => {
+        console.log('CALENDAR', res)
+
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
   }, [])
 
   const getDates = (startDate, stopDate) => {
