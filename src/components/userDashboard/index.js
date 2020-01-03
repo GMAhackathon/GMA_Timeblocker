@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 import Header from "./Header";
-import Display from "./Display";
+//import Display from "./Display";
+import UserDashboard from "./UserDashboard";
 
 function Index({ user }) {
-
   return (
     <div>
-      <Header />
-      <Display user={user}/>
+      {/*<Header />*/}
+      <UserDashboard user={user} />
     </div>
-  )
+  );
 }
 
 export default Index;

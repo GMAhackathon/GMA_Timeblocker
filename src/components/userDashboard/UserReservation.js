@@ -1,5 +1,5 @@
 import React from "react";
-import axiosWithAuth from "../authentication/axiosWithAuth";
+import axiosWithAuth from "../../authentication/axiosWithAuth";
 
 const UserReservation = props => {
   const handleDelete = e => {

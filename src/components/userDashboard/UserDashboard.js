@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import AccountSettingsPanel from "./AccountSettingsPanel";
 import UserPanel from "./UserPanel";
-import UserNavbar from "./UserNavBar";
+import Header from "./Header";
 import UserReservation from "./UserReservation";
-import axiosWithAuth from "../authentication/axiosWithAuth";
-import CalendarPage from "./userDashboard/CalendarPage";
+import axiosWithAuth from "../../authentication/axiosWithAuth";
+import CalendarPage from "./CalendarPage";
 
 const RESERVATIONDISPLAY = "RESERVATIONDISPLAY";
 const NORESERVATIONDISPLAY = "NORESERVATIONDISPLAY";
@@ -31,7 +31,6 @@ const UserDashboard = props => {
   // Api Call to logged in User
   useEffect(() => {
     const token = localStorage.getItem("token");
-    console.log(token);
     axiosWithAuth()
       .get("")
       .then(res => {
@@ -40,13 +39,11 @@ const UserDashboard = props => {
       .catch(err => console.log(err.message));
   });
 
-  console.log(user);
-
   switch (options) {
     case RESERVATIONDISPLAY:
       return (
         <div>
-          <UserNavbar />
+          <Header />
           User has reservation and in UserPanel
           <UserPanel />
           <UserReservation />
@@ -56,7 +53,7 @@ const UserDashboard = props => {
     case RESERVATIONEDIT:
       return (
         <div>
-          <UserNavbar />
+          <Header />
           User has reservation and in AccountSettingsPanel
           <AccountSettingsPanel />
           <UserReservation />
@@ -66,7 +63,7 @@ const UserDashboard = props => {
     case NORESERVATIONEDIT:
       return (
         <div>
-          <UserNavbar />
+          <Header />
           User does not have reservation and in AccountSettingsPanel
           <AccountSettingsPanel />
           <CalendarPage />
@@ -77,7 +74,7 @@ const UserDashboard = props => {
       // NORESERVATIONDISPLAY
       return (
         <div>
-          <UserNavbar />
+          <Header />
           User does not have reservation and in UserPanel
           <UserPanel />
           <CalendarPage />
