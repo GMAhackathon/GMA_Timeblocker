@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axiosWithAuth from './axiosWithAuth';
 import { Link } from 'react-router-dom';
 
-// import { Form } from 'semantic-ui-react';
-
 export default function Login(props)  {
     const [state, setState] = useState({
         email: '',
@@ -25,11 +23,24 @@ export default function Login(props)  {
             .then(res => {
                 console.log(res)
                 localStorage.setItem('token', res.data.token)
-                // below is the only way to retrieve the user id from server
+
                 localStorage.setItem('message', res.data.message)
                 localStorage.setItem('id', res.data.id)
                 localStorage.setItem('admin', res.data.admin)
-                props.history.push('/dashboard')                
+                let id = localStorage.getItem('id')
+                axiosWithAuth()
+                  .get(`https://gma-scheduler.herokuapp.com/api/users/${id}`)
+                  .then(res => {
+                      console.log('USER', res.data.user[0].current)
+                      localStorage.setItem('current', res.data.user[0].current)
+                      // localStorage.setItem('current', "")
+                      props.history.push('/dashboard') 
+
+                  })
+                  .catch(err => {
+                      console.log(err)
+                  })
+                               
             })
             .catch(err => {
                 console.log(err)
