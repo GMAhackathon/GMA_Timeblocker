@@ -6,7 +6,6 @@ const UserDashboard = props => {
 
   useEffect(() => {
     // Api Call to logged in User
-    f;
   });
 
   // Check if reservation exists
