@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import Logo from "../../assets/GMA.png";
-import AccountSettingsPanel from "./AccountSettingsPanel";
 
 const NavAdmin = styled.div`
   height: 100px;
@@ -36,19 +35,10 @@ const NavBarLeft = styled.div`
   color: #89878a;
 `;
 
-const ButtonContainer = styled.div`
-  display: flex;
-  padding-left: 15px;
-  color: #89878a;
-  align-items: center;
-`;
-
 function Header(props) {
   const logout = () => {
     props.history("/login");
   };
-
-  const toDashboard = () => {};
 
   return (
     <NavAdmin>
@@ -56,18 +46,11 @@ function Header(props) {
         <LogoWrap>
           <LogoImg src={Logo}></LogoImg>
         </LogoWrap>
-        <ButtonContainer>
-          <img src="" />
-          <button onClick={toDashboard}>Dashboard</button>
-        </ButtonContainer>
       </NavBarLeft>
 
       <NavBarRight>
         <div style={{ fontWeight: "600", paddingRight: "20px" }}>
           Hello, username!
-        </div>
-        <div className="rightside-button-container">
-          <button onClick={() => AccountSettingsPanel}>Account Settings</button>
         </div>
         <a onClick={logout} style={{ color: "#89878a" }}>
           Sign out
