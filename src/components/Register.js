@@ -24,10 +24,16 @@ const Register = (props) => {
         e.preventDefault();
 
         axiosWithAuth()
-        .post('/register', credentials)
+        .post('/auth/register', credentials)
         .then(res => {
-            localStorage.setItem('token', res.data.payload);
-            props.history.push('/login') //or whatever endpoint user dashboard is
+            localStorage.setItem('token', res.data.token);
+            const id = localStorage.getItem('id')
+
+            axiosWithAuth()
+            .get(`/users/${id}`)
+            .then(res => {
+                props.history.push('/dashboard') 
+            })
         })
         .catch(err => {
             console.log(err);

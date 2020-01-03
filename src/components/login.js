@@ -21,10 +21,20 @@ const Login = (props) => {
         e.preventDefault();
 
         axiosWithAuth()
-        .post('/login', credentials)
+        .post('/auth/login', credentials)
         .then(res => {
-            localStorage.setItem('token', res.data.payload);
-            // props.history.push('/dashboard') //or whatever endpoint user dashboard is
+            console.log(res)
+            localStorage.setItem('token', res.data.token);
+
+            const id = localStorage.getItem('id')
+
+            axiosWithAuth()
+            .get(`/users/${id}`)
+            .then(res => {
+                props.history.push('/dashboard') 
+            })
+           
+        
         })
         .catch(err => {
             console.log(err);
