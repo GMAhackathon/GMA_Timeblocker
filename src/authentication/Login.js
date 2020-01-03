@@ -21,7 +21,7 @@ export default function Login(props)  {
         e.preventDefault()
         console.log(state)
         axiosWithAuth()
-            .post('http://localhost:5000/api/auth/login', state)
+            .post('https://gma-scheduler.herokuapp.com/api/auth/login', state)
             .then(res => {
                 console.log(res)
                 localStorage.setItem('token', res.data.token)

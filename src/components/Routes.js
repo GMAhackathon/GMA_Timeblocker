@@ -10,16 +10,7 @@ function Routes(props) {
     <div>
       <Switch>
         <Route path='/login' render={(props) => <Login {...props} />} />
-        {/* <PrivateRoute exact path="/dashboard" render={() => 
-          <>
-            <AdminDashboard />
-          </>}/>  */}
-          <Route exact path="/dashboard" render={() => 
-          <>
-            <Dashboard />
-          </>}/> 
-
-       
+        <PrivateRoute exact path="/dashboard" component={Dashboard}/>        
       </Switch>
     </div>
   );
