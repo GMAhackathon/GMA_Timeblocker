@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import axiosWithAuth from './axiosWithAuth';
 import { Link } from 'react-router-dom';
 
-// import { Form } from 'semantic-ui-react';
-
 export default function Login(props)  {
     const [state, setState] = useState({
         email: '',
@@ -35,6 +33,7 @@ export default function Login(props)  {
                   .then(res => {
                       console.log('USER', res.data.user[0].current)
                       localStorage.setItem('current', res.data.user[0].current)
+                      // localStorage.setItem('current', "")
                       props.history.push('/dashboard') 
 
                   })
