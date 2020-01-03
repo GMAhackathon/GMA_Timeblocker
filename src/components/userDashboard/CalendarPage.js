@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import moment from 'moment';
 import { Modal, Button } from 'antd';
-import './Calendar.css'
+import './Calendar.css';
+import axiosWithAuth from '../../authentication/axiosWithAuth';
 
 function CalendarPage() {
   const [dateRange, setDateRange] = useState([]);
@@ -51,8 +52,11 @@ function CalendarPage() {
 
 
 function Card({ item, day }) {
+const id = localStorage.getItem('id')
 const [modal, setModal] = useState(false);
-const [familySize, setFamilySize] = useState({size: ''})
+const [familySize, setFamilySize] = useState({size: ''});
+const [successMessage, setSuccessMessage] = useState(false);
+const [failureMessage, setFailureMessage] = useState(false);
 
 const handleClick = () => {
   // alert('Click')
@@ -60,7 +64,29 @@ const handleClick = () => {
 }
 
 const handleConfirm = () => {
-console.log(familySize)
+  console.log(familySize)
+  //api/calendar/appointments
+  let newAppointment = {users_id: id, date: item, meals: familySize.size};
+  console.log('APPT', newAppointment)
+  axiosWithAuth()
+  .post('https://gma-scheduler.herokuapp.com/api/calendar/appointments', newAppointment)
+  .then(res => {
+      console.log(res)
+      // props.history.push('/dashboard') 
+      setSuccessMessage(true)
+      setTimeout(() => {
+        handleCancel(); 
+      }, 2000) 
+                  
+  })
+  .catch(err => {
+      console.log(err)
+      setFailureMessage(true)
+      setTimeout(() => {
+        handleCancel(); 
+      }, 2000) 
+  })
+
 }
 
 const handleCancel = () => {
@@ -101,6 +127,8 @@ return (
                   style={{marginLeft: '10px', width: '50px'}}
                   />
               </p>
+              <p style={{display: `${successMessage ? 'block' : 'none'}`, color: 'green'}}>You reservation has been added</p>
+              <p style={{display: `${failureMessage ? 'block' : 'none'}`, color: 'red'}}>Something went wrong. Try again.</p>
             </Modal>
     ) : null}
   </div>
