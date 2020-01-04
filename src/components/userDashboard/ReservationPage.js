@@ -6,7 +6,7 @@ import Display from './Display';
 
 function ReservationPage() {
   const current = JSON.parse(localStorage.getItem('current'));
-
+  console.log('DATE', current)
   const [modal, setModal] = useState(false);
   const [successMessage, setSuccessMessage] = useState(false);
   const [failureMessage, setFailureMessage] = useState(false);
@@ -55,7 +55,7 @@ function ReservationPage() {
     <div style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
       <div style={{fontSize: '28px', fontWeight: '600', marginTop: '20px'}}>You have a reservation</div>
       <div style={{fontSize: '18px', fontWeight: '700', marginTop: '20px'}}>
-           Date: {moment(current.date).format('dddd')} - {moment(current.date).format('YYYY-MM-DD')}  (3-6 PM)
+           Date: {moment(current.date).utc().format('dddd')} - {moment(current.date).utc().format('YYYY-MM-DD')}  (3-6 PM)
       </div>
       <button onClick={handleClick} style={{marginTop: '20px'}}>CANCEL</button>
       {modal ? (

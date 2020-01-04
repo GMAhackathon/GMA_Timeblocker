@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-// import moment from 'moment';
-import { Spin } from 'antd';
 import axiosWithAuth from '../../authentication/axiosWithAuth';
 
 const FormWrap = styled.form`
@@ -36,9 +34,9 @@ const Button = styled.button`
 `
 
 
-function UserRegistrationForm({setReload, setForm}) {
+function UserRegistrationForm({setReload, setForm, handleCancelButtonOnForm}) {
   const [user, setUser] = useState({firstName: '', lastName: '', email: '', familySize: '', password: '',
-                                     admin: false, current: null});
+                                   });
   
 
   useEffect(() => {
@@ -54,7 +52,7 @@ function UserRegistrationForm({setReload, setForm}) {
     event.preventDefault();
 
     axiosWithAuth()
-    .post('https://gma-scheduler.herokuapp.com/api/users', user)
+    .post('https://gma-scheduler.herokuapp.com/api/auth/register', user)
     .then(res => {
         console.log('NEW USER', res);
         setReload(true);
@@ -69,7 +67,7 @@ function UserRegistrationForm({setReload, setForm}) {
 
   function handleCancel(event) {
     event.preventDefault();
-    props.handleCancelButtonOnForm();
+    handleCancelButtonOnForm();
   }
 
 
