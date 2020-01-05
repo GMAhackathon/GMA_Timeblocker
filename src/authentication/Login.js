@@ -21,7 +21,7 @@ export default function Login(props)  {
         axiosWithAuth()
             .post('https://gma-scheduler.herokuapp.com/api/auth/login', state)
             .then(res => {
-                console.log(res)
+                console.log('login', res)
                 localStorage.setItem('token', res.data.token)
 
                 localStorage.setItem('message', res.data.message)
@@ -31,7 +31,6 @@ export default function Login(props)  {
                 axiosWithAuth()
                   .get(`https://gma-scheduler.herokuapp.com/api/users/${id}`)
                   .then(res => {
-                      // console.log('USER', res.data.appointment.pop())
                       if (res.data.appointment.length > 0) {
                         localStorage.setItem('current', JSON.stringify(res.data.appointment.pop()))
                       } else {

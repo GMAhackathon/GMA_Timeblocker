@@ -36,6 +36,8 @@ const NavBarLeft = styled.div`
 `;
 
 function Header(props) {
+  const message = localStorage.getItem('message');
+
   const logout = () => {
     props.history("/login");
   };
@@ -49,9 +51,7 @@ function Header(props) {
       </NavBarLeft>
 
       <NavBarRight>
-        <div style={{ fontWeight: "600", paddingRight: "20px" }}>
-          Hello, username!
-        </div>
+        <div style={{fontWeight: '600', paddingRight: '20px'}}>{message}</div>
         <a onClick={logout} style={{ color: "#89878a" }}>
           Sign out
         </a>

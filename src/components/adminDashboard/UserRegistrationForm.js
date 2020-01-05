@@ -157,26 +157,6 @@ function UserRegistrationForm({setReload, setForm, handleCancelButtonOnForm}) {
             </Button>
 
           </div>
-          <div style={{ gridColumn: "span 1" }}>
-            <ChildrenContainer>
-              <h3>Children</h3>
-              <h4>{student}</h4>
-              {console.log(student)}
-              <p>{student}</p>
-              {/*{student.map(stu => alert(InsideMap))}
-            </ChildrenContainer>
-          </div> */}
-        </div>
-      </fieldset>
-      <div style={{ alignSelf: "flex-end" }}>
-        <Button
-          onClick={handleCancel}
-          style={{ background: "#C73642", width: "80px" }}
-        >
-          Cancel
-        </Button>
-        <Button type="submit">Add student</Button>
-      </div>
     </FormWrap>
   );
 }
