@@ -30,3 +30,21 @@ export const usersTableColumns = [
     key: 6
   }
 ]
+
+export const calendarTableColumns = [
+  {
+    title: 'User ID',
+    dataIndex: 'users_id',
+    key: 1
+  },
+  {
+    title: 'Date',
+    dataIndex: 'date',
+    key: 2
+  },
+  {
+    title: 'Meals',
+    dataIndex: 'meals',
+    key: 4
+  }
+]

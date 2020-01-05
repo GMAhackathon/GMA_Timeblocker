@@ -71,6 +71,7 @@ function Card({ item, day, reload }) {
   const handleClick = () => {
     // alert('Click')
     setModal(true)
+    console.log('ITEM', item)
   }
 
   const handleConfirm = () => {

@@ -1,8 +1,6 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-// import moment from 'moment';
-import { Spin } from "antd";
-import axiosWithAuth from "../../authentication/axiosWithAuth";
+import React, {useEffect, useState} from 'react';
+import styled from 'styled-components';
+import axiosWithAuth from '../../authentication/axiosWithAuth';
 
 const FormWrap = styled.form`
   // background: #EDEEEF;
@@ -53,18 +51,15 @@ const ChildrenContainer = styled.div`
   font-weight: bold;
 `;
 
-function UserRegistrationForm(props) {
-  const [user, setUser] = useState({
-    firstName: "",
-    lastName: "",
-    email: "",
-    familySize: ""
-  });
 
-  // display a spinner on isLoading when posting a new record
-  const [loading, setLoading] = useState(props.createNewStudentIsLoading);
+function UserRegistrationForm({setReload, setForm, handleCancelButtonOnForm}) {
+  const [user, setUser] = useState({firstName: '', lastName: '', email: '', familySize: '', password: '',
+                                   });
+  
 
-  useEffect(() => {}, [loading]);
+  useEffect(() => {
+
+  }, [])
 
   function handleChange(event) {
     setUser({ ...user, [event.target.name]: event.target.value });
@@ -72,104 +67,95 @@ function UserRegistrationForm(props) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    axiosWithAuth()
-      .post("https://gma-scheduler.herokuapp.com/api/auth/register", user)
-      .then(res => {
-        localStorage.setItem("token", res.data.token);
-        const id = localStorage.getItem("id");
 
-        axiosWithAuth()
-          .get(`/users/${id}`)
-          .then(res => {
-            props.history.push("/dashboard");
-          });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    axiosWithAuth()
+    .post('https://gma-scheduler.herokuapp.com/api/auth/register', user)
+    .then(res => {
+        console.log('NEW USER', res);
+        setReload(true);
+        setForm(false);
+
+    })
+    .catch(err => {
+        console.log(err)
+    })
+
   }
 
   function handleCancel(event) {
     event.preventDefault();
-    props.handleCancelButtonOnForm();
+    handleCancelButtonOnForm();
   }
 
-  return (
-    <FormWrap onSubmit={handleSubmit} style={{ margin: "30px 10px 20px 10px" }}>
-      <fieldset
-        style={{
-          border: "1px solid transparent",
-          margin: "10px 5px 0px 5px",
-          background: "#d8dee0"
-        }}
-      >
-        <div
-          style={{
-            display: "grid",
-            textAlign: "left",
-            gridTemplateColumns: "1fr 1fr 1fr 1fr",
-            gridGap: "10px",
-            margin: "10px"
-          }}
-        >
-          <div>
-            <label>First Name</label>
-            <div>
-              <Input
-                type="text"
-                name="firstName"
-                value={user.firstName}
-                onChange={handleChange}
-              />
+
+      return (
+        <FormWrap onSubmit={handleSubmit} style={{margin: '30px 10px 20px 10px'}}>
+          <fieldset style={{border: '1px solid transparent', margin: '10px 5px 0px 5px',  background: '#d8dee0'}}>
+            <div style={{display: 'grid', textAlign: 'left', gridTemplateColumns: '1fr 1fr 1fr',
+                         gridGap: '10px', margin: '10px', marginBottom: '15px'}}>
+              <div >
+                <label>First Name</label>
+                <div>
+                  <Input
+                    type="text"
+                    name="firstName"
+                    value={user.firstName}
+                    onChange={handleChange} />
+                </div>
+              </div>
+              <div>
+                <label>Last Name</label>
+                <div>
+                  <Input
+                    type="text"
+                    name="lastName"
+                    value={user.lastName}
+                    onChange={handleChange} />
+                </div>
+              </div>
+              <div >
+                <label>Email</label>
+                <div>
+                  <Input 
+                    style={{width: '100%'}}
+                    type="text"
+                    name="email"
+                    value={user.email}
+                    onChange={handleChange} />
+                </div>
+              </div>
+              <div>
+                <label>Family Size</label>
+                <div>
+                  <Input 
+                    style={{width: '100%'}}
+                    type="text"
+                    name="familySize"
+                    value={user.familySize}
+                    onChange={handleChange} />
+                </div>
+              </div>
+              <div>
+                <label>Password</label>
+                <div>
+                  <Input 
+                    style={{width: '100%'}}
+                    type="text"
+                    name="password"
+                    value={user.password}
+                    onChange={handleChange} />
+                </div>
+              </div>
             </div>
-          </div>
-          <div>
-            <label>Last Name</label>
-            <div>
-              <Input
-                type="text"
-                name="lastName"
-                value={user.lastName}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div style={{ gridColumn: "span 2" }}>
-            <label>Email</label>
-            <div>
-              <Input
-                style={{ width: "100%" }}
-                type="text"
-                name="email"
-                value={user.email}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          <div style={{ gridColumn: "span 2" }}>
-            <label>Family Size</label>
-            <div>
-              <Input
-                style={{ width: "100%" }}
-                type="text"
-                name="familySize"
-                value={user.familySize}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          {/* <div style={{ gridColumn: "span 1" }}>
-            <label>Child's Name</label>
-            <div>
-              <Input
-                style={{ width: "100%" }}
-                type="text"
-                name="name"
-                value={childsName}
-                onChange={handleChildChange}
-              />
-            </div>
-            <AddChildButton onClick={addChild}>Add Child</AddChildButton>
+          </fieldset>
+          <div style={{alignSelf: 'flex-end'}}>
+            <Button onClick={handleCancel} style={{background: '#C73642', width: '80px'}}>
+              Cancel
+            </Button>
+            <Button type="submit">
+              Add user
+            </Button>
+
           </div>
           <div style={{ gridColumn: "span 1" }}>
             <ChildrenContainer>

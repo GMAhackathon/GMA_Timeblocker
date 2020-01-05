@@ -23,11 +23,7 @@ margin-right: 10px;
 
 const Users = props => {
   const [users, setUsers] =  useState([]);
-  const [search, setSearch] = useState(''); //TODO: add search functionality and display the search result array
   const [form, setForm] = useState(false);
-  const [studentId, setStudentId] = useState(undefined);
-  const [newRecord, setNewRecord] = useState(false); //this component refreshes when the new record is added so that the new student apprears in the student list
-  const [savePrevState, setSavePrevState] = useState(newRecord); //usefull when another student record needs to be added right after the first one
   const [displaySuccessMessage, setDisplaySuccessMessage] = useState('none');
 
   const [modal, setModal] = useState(false);
@@ -39,13 +35,10 @@ const Users = props => {
 
     
   useEffect(() => {
-    //get users data, set to state
-    // setUsers = axios.get('/users')
 
     axiosWithAuth()
     .get('https://gma-scheduler.herokuapp.com/api/users')
     .then(res => {
-        console.log('USERS DATA', res)
         let data = res.data;
         setUsers(data.sort((a,b) => { 
           return b.id - a.id }
@@ -64,7 +57,6 @@ const Users = props => {
 
   const handleAddButton = () => {
     setForm(!form);
-    // props.resetSuccessMessage(); //useful when another record needs to be added right after the first one
   }
 
   const displaySuccessMessageTimeout = () => {
@@ -76,7 +68,6 @@ const Users = props => {
   }
 
   const handleRowClick = (user) => {
-    console.log('RECORD', user)
     setModal(true);
     setUser(user);
   }
@@ -86,12 +77,9 @@ const Users = props => {
   }
 
   const handleDeleteUser = () => {
-    console.log('SET USER: ', user)
-    //api/users/1 
     axiosWithAuth()
     .delete(`https://gma-scheduler.herokuapp.com/api/users/${user.id}`)
     .then(res => {
-        console.log('USERS DATA', res)
         setModal(false);
         setReload(true);
     })
@@ -117,9 +105,7 @@ const Users = props => {
           </RowAbove>
 
           {form ? (
-            <UserRegistrationForm handleCancelButtonOnForm={handleCancelButtonOnForm} setNewRecord={setNewRecord} 
-                                      newRecord={newRecord} displaySuccessMessageTimeout={displaySuccessMessageTimeout}
-                                      setSavePrevState={setSavePrevState}/>
+            <UserRegistrationForm setReload={setReload} setForm={setForm} handleCancelButtonOnForm={handleCancelButtonOnForm}/>
           ) : null}
           
           
@@ -135,8 +121,6 @@ const Users = props => {
             onRow={(record, rowIndex) => {
               return {
                 onClick: event => {
-                  // setStudentId(record.id)
-                  // props.getStudentById(record.id)
                   handleRowClick(record)
                 }
               };
