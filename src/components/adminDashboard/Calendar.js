@@ -34,9 +34,6 @@ function Calendar() {
       onRow={(record, rowIndex) => {
         return {
           onClick: event => {
-            // setStudentId(record.id)
-            // props.getStudentById(record.id)
-            // handleRowClick(record)
           }
         };
       }}
