@@ -10,7 +10,7 @@ const FormWrap = styled.form`
   display: flex;
   flex-direction: column;
   transition: all 200ms ease;
-`
+`;
 
 const Input = styled.input`
   outline: none;
@@ -19,7 +19,7 @@ const Input = styled.input`
   background: white;
   width: 100%;
   height: 26px;
-`
+`;
 
 const Button = styled.button`
   width: 120px;
@@ -31,7 +31,25 @@ const Button = styled.button`
   color: white;
   outline: none;
   cursor: pointer;
-`
+`;
+
+const AddChildButton = styled.button`
+  display: flex;
+  width: 75px;
+  height: 25px;
+  border-radius: 3px;
+  margin: 5px 5px 0px 0px;
+  background: #50a76d;
+  text-align: center;
+  color: white;
+  outline: none;
+  cursor: pointer;
+`;
+
+const ChildrenContainer = styled.div`
+  text-align: center;
+  font-weight: bold;
+`;
 
 
 function UserRegistrationForm({setReload, setForm, handleCancelButtonOnForm}) {
@@ -43,10 +61,9 @@ function UserRegistrationForm({setReload, setForm, handleCancelButtonOnForm}) {
 
   }, [])
 
-
   function handleChange(event) {
-    setUser({ ...user, [event.target.name]: event.target.value })
-  }                                        
+    setUser({ ...user, [event.target.name]: event.target.value });
+  }
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -138,9 +155,30 @@ function UserRegistrationForm({setReload, setForm, handleCancelButtonOnForm}) {
             <Button type="submit">
               Add user
             </Button>
+
           </div>
-        </FormWrap>
-      )
+          <div style={{ gridColumn: "span 1" }}>
+            <ChildrenContainer>
+              <h3>Children</h3>
+              <h4>{student}</h4>
+              {console.log(student)}
+              <p>{student}</p>
+              {/*{student.map(stu => alert(InsideMap))}
+            </ChildrenContainer>
+          </div> */}
+        </div>
+      </fieldset>
+      <div style={{ alignSelf: "flex-end" }}>
+        <Button
+          onClick={handleCancel}
+          style={{ background: "#C73642", width: "80px" }}
+        >
+          Cancel
+        </Button>
+        <Button type="submit">Add student</Button>
+      </div>
+    </FormWrap>
+  );
 }
 
 export default UserRegistrationForm;
