@@ -11,9 +11,9 @@ All packages that are currently used should be installed by just using the follo
 If this does not work for you use the "Install all needed packages in 2 bundles below".
 
 ### Install all needed packages in 2 bundles
-`npm install -D prettier eslint eslint-config-prettier parcel-bundler babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react`
+`npm install -D prettier eslint eslint-config-prettier parcel-bundler babel-eslint eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks babel-eslint @babel/core @babel/preset-env @babel/plugin-proposal-class-properties @babel/preset-react  @testing-library/jest-dom @testing-library/react`
 
-`npm install react react-dom react-router-dom react-redux babel-cli express @emotion/core @emotion/babel-preset-css-prop styled-components`
+`npm install react react-dom react-router-dom react-redux babel-cli express dotenv @material-ui/core @material-ui/icons dotenv`
 
 ### Or install them one at a time
 `npm install -D prettier`
